@@ -1,0 +1,93 @@
+git(バージョン管理ツール)
+
+
+                    移動    　 　　   　　　　　　　ワークツリー                         
+             cd      →                                                             
+                                mkdir (ディレクトリ作成)                               ←　git init (gitで使えるようにする)
+                                   touch (ファイル作成)        　                    
+                                        echo "出力内容" >> ファイル名                                                                         ｜
+                                                                                                                                         ｜
+            git status                                                                                                                   ｜
+                                                                                                                                        ｜
+                                                    ↓  　　　　　　git add .　(ファイル全部)
+                                                                 git add ファイル名
+            git status
+
+                                            　 インデックス            
+
+
+                                                    ↓           git commit -m "コメント"
+
+
+                                            　ローカルリポジトリ                 
+        　　git diff
+             変更内容確認
+        　　git log
+          　 変更履歴確認（いつ、誰が、なぜ）
+
+        （共同で誰かが作ったものを初回ローカルにいれる）             （新規リポジトリ作成）紐付け
+            git clone url                                git remote add origin url
+                       ↑（ssh）                                                 ↑（ssh）
+
+
+        git pull　リモートリポジトリ名　ブランチ名  ↑　              　↓  git push リモートリポジトリ名　ブランチ名
+                git fetch リモートリポジトリ名 （コピーする）          　                (origin)     (master)
+                git merge リモートリポジトリ名　ブランチ名 （ローカルに反映する）      
+                        mergeするときはmergeする場所にcheckoutする
+
+        　  git diff
+        　  git log
+          　 
+
+
+                                        　    リモートリポジトリ
+
+
+                                                        ブランチ作成　←　git branch ブランチ名
+                                                                　　　　(git checkout -b ブランチ名 master)
+                                                                              ブランチをきる、〜という、〜から
+        　　git branch (ブランチの一覧とスイッチ確認)
+        　　git checkout ブランチ名（編集するブランチにスイッチ）
+
+
+
+-------------------------------
+初期設定の
+　　リモートリポジトリ名　　origin
+　　ブランチ名          　master
+
+
+
+                プルリクエスト
+                        ブランチで作ったコードをmasterにmergeしてくださいリクエスト
+                        ↓
+                　　　修正コメント　　　or     承認
+                                        　　 ↓
+                                        merge pull request
+
+
+ブランチのバッティングエラー
+
+同一ブランチで違うファイル作業時のエラー
+        Aさん（デザイナー）　　→　　OK          ↓               git push リポ　ブラ
+        Bさん（プログラマ）　　→　　→　　NG　　git pull リボ　ブラ　　↑
+複数人の場合（コンフリクト）
+        同じブランチ            
+        　　同じファイル           を作業　→　gitからエラー　→　修正　→　git commit -m "コメント"　→　git push リポ　ブラ
+                同じ行
+
+
+[その他コマンド]
+git reset --hard HEAD    (git logの履歴から最終commitの状態に戻す)
+過去の状態に戻す
+
+git stash    (一旦消す)　　　　　　（作業するブランチの場所を間違えた時）
+　　　↓
+git checkout ブランチ名
+　　　↓
+git stash pop    (戻す)
+
+ls                       (いる場所のディレクトリ、ファイル一覧)
+
+git remote set - url origin url     (ssh,httpsの切替)
+
